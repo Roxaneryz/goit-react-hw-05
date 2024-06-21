@@ -1,29 +1,35 @@
-import { Route, Router } from "react-router-dom"
-import HomePage from "./pages/HomePage"
-import MoviePage from "./pages/MoviePage"
-import MovieDetailsPage from "./pages/MovieDetailsPage"
-import MovieCast from "./components/MovieCast/MovieCast"
-import MovieReview from "./components/MovieReview/MovieReview"
-import NotFoundPage from "./pages/NotFoundPage"
+import { Route, Routes } from "react-router-dom"
+import {lazy, Suspense } from "react"
+import Navigation from "./components/Navigation/Navigation"
 
 
+
+
+const HomePage= lazy(() => import("./pages/HomePage/HomePage"));
+const MoviesPage = lazy(() => import('./pages/MoviePage/MoviePage'));
+const MovieDetailsPage = lazy(() => import('./pages/MovieDetailsPage/MovieDetailsPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
+const MovieCast = lazy(() => import('./components/MovieCast/MovieCast'));
+const MovieReviews = lazy(() => import('./components/MovieReview/MovieReview'));
 
 const App = () => {
   return (
-    <Router>
-      <Route path="/" elements={<HomePage/>}>
-        <Route path="/movies" elements={<MoviePage />} />
-        <Route path="/movies/:moviesId" elements={<MovieDetailsPage />}>
-          <Route path="cast" elemnts={<MovieCast />} />
-          <Route path= "reviews" elements={<MovieReview/>}/>
-        </Route>
-        <Route path = "*" elemnts = {<NotFoundPage/>}/>
-
-      </Route>
-
-     
-  </Router>
-  )
+    <div>
+      <Navigation />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" elements={<HomePage />}/>
+            <Route path="/movies" elements={<MoviesPage />} />
+            <Route path="/movies/:moviesId" elements={<MovieDetailsPage />}>
+              <Route path="cast" elements={<MovieCast />} />
+              <Route path="reviews" elements={<MovieReviews />} />
+            </Route>
+            <Route path="*" elements={<NotFoundPage />} />
+          
+        </Routes>
+      </Suspense>
+    </div>
+  );
 }
 
 export default App
