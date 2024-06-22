@@ -5,7 +5,7 @@ import { fetchMovieDetails } from "../../movieApi";
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
-  const [movie, setMovie] = useState(null);
+  const [movieDet, setMovieDet] = useState(null);
   const navigate  = useNavigate();
   const location = useLocation();
 
@@ -13,21 +13,21 @@ const MovieDetailsPage = () => {
   useEffect(() => {
     const getMovieDetails = async () => {
       const movie = await fetchMovieDetails(movie);
-      setMovie(movie);
+      setMovieDet(movie);
     };
     getMovieDetails();
   }, [movieId]);
-  if (!movie) {
+  if (!movieDet) {
     return <div>Loading....</div>
   }
 
   return (<div>
     <button onClick={() => navigate(location?.state?.from ?? "/moview")}>Go back</button>
-    <h1>{movie.title}</h1>
-    <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
-    <p>{movie.overview}</p>
-    <p>Release Date: {movie.release_date}</p>
-    <p>Rating: {movie.vote_average}</p>
+    <h1>{movieDet.title}</h1>
+    <img src={`https://image.tmdb.org/t/p/w500${movieDet.poster_path}`} alt={movieDet.title} />
+    <p>{movieDet.overview}</p>
+    <p>Release Date: {movieDet.release_date}</p>
+    <p>Rating: {movieDet.vote_average}</p>
   
     <nav>
       <Link to="cast">Cast</Link>
