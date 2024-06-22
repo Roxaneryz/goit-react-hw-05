@@ -12,13 +12,13 @@ const MoviesPage = () => {
 
 
 
-  //  useEffect(() => {
-  //    const queryParam = searchParams.get("query");
-  //    if (queryParam) {
-  //      setQuery(queryParam);
-  //      searchMovies(queryParam).then(setMovies);
-  //    }
-  //  }, [searchParams]);
+   useEffect(() => {
+     const queryParam = searchParams.get("query");
+     if (queryParam) {
+       setQuery(queryParam);
+       searchMovies(queryParam).then(setMovies);
+     }
+   }, [searchParams]);
   
   const handleSearch = async (e) => {
     e.preventDefault();
