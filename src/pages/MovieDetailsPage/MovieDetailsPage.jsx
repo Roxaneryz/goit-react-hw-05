@@ -12,7 +12,7 @@ const MovieDetailsPage = () => {
 
   useEffect(() => {
     const getMovieDetails = async () => {
-      const movie = await fetchMovieDetails(movie);
+      const movie = await fetchMovieDetails(movieId);
       setMovieDet(movie);
     };
     getMovieDetails();
