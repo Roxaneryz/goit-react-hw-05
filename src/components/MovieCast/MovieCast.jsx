@@ -18,7 +18,7 @@ const MovieCast = () => {
     <h2>Cast</h2>
     <ul>
       {cast.map((member) => {
-        <li key={member.cast_id}>
+       return <li key={member.cast_id}>
         {member.name} as {member.character}
       </li>})}
     </ul>
