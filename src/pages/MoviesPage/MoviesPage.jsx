@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { searchMovies } from "../../movieApi";
 import MovieList from "../../components/MovieList/MovieList";
-
+import css from "./MoviePage.module.css"
 
 
 const MoviesPage = () => {
@@ -27,15 +27,25 @@ const MoviesPage = () => {
     setMovies(movies);
 
   };
-  return (<div>
-    <h1>Search Movies</h1>
-    <form onSubmit={handleSearch}>
-      <input type="text" name='movie' value={query} onChange={(e) => setQuery(e.target.value)}
-        placeholder="Enter movie title" />
-      <button type="submit">Search</button>
-    </form>
-    <MovieList movies={movies}/>
-  </div>)
+  return (
+    <div>
+      <h1>Search Movie App</h1>
+      <form className={css.searchForm} onSubmit={handleSearch}>
+        <input
+          type="text"
+          name="movie"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Enter movie title"
+          className={css.searchInput}
+        />
+        <button className={css.searchBtn} type="submit">
+          Search
+        </button>
+      </form>
+      <MovieList movies={movies} />
+    </div>
+  );
 };
 
 

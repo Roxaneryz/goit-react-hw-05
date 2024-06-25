@@ -13,6 +13,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  text-align:justify;
+  align-items: center;
+  justify-content: center;
+  
+}
+
 a {
   font-weight: 500;
   color: #646cff;

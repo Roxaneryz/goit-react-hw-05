@@ -1,0 +1,27 @@
+.movieList {
+  padding: 20px;
+}
+
+.movieList .movList {
+
+  padding: 0;
+}
+
+.movieList .movListIt {
+  margin-bottom: 10px;
+}
+
+.movieList .movListIt:last-child {
+  margin-bottom: 0;
+}
+
+.movieList a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.movieList a:hover {
+  color: #0056b3;
+}
