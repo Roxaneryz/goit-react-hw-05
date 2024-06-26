@@ -6,17 +6,32 @@ import { fetchMovieReviews } from "../../movieApi";
 
 
 const MovieReviews = () => {
+    
     const { movieId } = useParams();
     const [reviews, setReviews] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         
         const getMovieReviews = async () => {
-            const reviews = await fetchMovieReviews(movieId);
-            setReviews(reviews);
+          
+            try {
+                const reviews = await fetchMovieReviews(movieId);
+                setReviews(reviews);
+                setIsLoading(false);
+            } catch (error) {
+                setIsLoading(false);
+            }
         };
         getMovieReviews();
     }, [movieId]);
+
+    if (isLoading) {
+        return <div> Loading reviews...</div>;
+    }
+    if (reviews.length === 0) {
+        return <div>No reviews available for this movie.</div>;
+    }
 
     return (<div className={css.movieReview}>
         

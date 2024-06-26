@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { searchMovies } from "../../movieApi";
 import MovieList from "../../components/MovieList/MovieList";
-import css from "./MoviePage.module.css"
+import css from "./MoviePage.module.css";
+import toast, { Toaster } from "react-hot-toast";
 
 
 const MoviesPage = () => {
@@ -20,11 +21,12 @@ const MoviesPage = () => {
      }
    }, [searchParams]);
   
-  const handleSearch = async (e) => {
+  const handleSearch = (e) => {
     e.preventDefault();
     setSearchParams({ query });
-    const movies = await searchMovies(query);
-    setMovies(movies);
+    if (query.trim() === "") {
+      toast.error("Please enter a movie name");
+    }
 
   };
   return (
@@ -43,6 +45,7 @@ const MoviesPage = () => {
           Search
         </button>
       </form>
+      <Toaster position="top-center" reverseOrder={false} />
       <MovieList movies={movies} />
     </div>
   );

@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import { fetchMovieDetails } from "../../movieApi";
 import css from "./MovieDetailsPage.module.css"
@@ -9,6 +8,7 @@ const MovieDetailsPage = () => {
   const [movieDet, setMovieDet] = useState(null);
   const navigate  = useNavigate();
   const location = useLocation();
+  const locationStateRef = useRef(location.state);
 
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const MovieDetailsPage = () => {
   }
 
   return (<div className={css.movieDet}>
-    <button onClick={() => navigate(location?.state?.from ?? "/moview")}>Go back</button>
+    <button onClick={() => navigate(locationStateRef.current?.from ?? "/moview")}>Go back</button>
     <h1>{movieDet.title}</h1>
     <img src={`https://image.tmdb.org/t/p/w500${movieDet.poster_path}`} alt={movieDet.title} />
     <p className={css.pDetails}>{movieDet.overview}</p>
